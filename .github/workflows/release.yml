@@ -38,3 +38,9 @@ jobs:
         with:
           release-branch-name: "release"
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          maven-servers: |
+            [{
+                "id": "github",
+                "username": "${{ secrets.RELEASE_USER }}",
+                "password": "${{ secrets.RELEASES_PWD }}"
+            }]
