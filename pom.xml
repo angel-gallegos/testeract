@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.angel.gaan</groupId>
 	<artifactId>testeract</artifactId>
-	<version>0.0.5</version>
+	<version>0.0.6-SNAPSHOT</version>
 	<name>testeract</name>
 	<description>Testeract</description>
 	<url />
@@ -30,7 +30,7 @@
         <connection>scm:git:${project.scm.url}</connection>
         <developerConnection>scm:git:${project.scm.url}</developerConnection>
         <url>https://github.com/angel-gallegos/testeract.git</url>
-        <tag>testeract-0.0.5</tag>
+        <tag>HEAD</tag>
     </scm>
 	<properties>
 		<java.version>21</java.version>
