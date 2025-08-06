@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.angel.gaan</groupId>
 	<artifactId>testeract</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>testeract</name>
 	<description>Testeract</description>
 	<url/>
@@ -24,11 +24,8 @@
         <repository>
             <id>github</id>
             <url>https://maven.pkg.github.com/angel-gallegos/testeract</url>
+            <name>github</name>
         </repository>
-        <snapshotRepository>
-            <id>github-snapshots</id>
-            <url>https://maven.pkg.github.com/angel-gallegos/testeract</url>
-        </snapshotRepository>
     </distributionManagement>
     <scm>
         <connection>scm:git:${project.scm.url}</connection>
