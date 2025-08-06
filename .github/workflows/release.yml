@@ -31,3 +31,11 @@ jobs:
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release the code
+        if: "github.ref_name == 'release' && !contains(github.event.head_commit.message, '[ci skip]')"
+        uses: qcastel/github-actions-maven-release@master
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-21-openjdk/
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}    
