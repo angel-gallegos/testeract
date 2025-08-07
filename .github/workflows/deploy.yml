@@ -1,3 +1,5 @@
+name: Deploy with maven
+
 on:
   push:
     branches-ignore:
