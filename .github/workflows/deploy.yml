@@ -2,8 +2,14 @@ name: Deploy with maven
 
 on:
   push:
-    branches-ignore:
-      - 'release'
+    branches:
+      - 'main'
+      - 'master'
+  pull_request:
+    types: [opened, reopened]
+    branches:
+      - 'main'
+      - 'master'
   
   workflow_dispatch:
 
