@@ -12,30 +12,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
+      actions: write
+      repository-projects: write
       packages: write
     steps:
 
       - name: Checkout Code
         uses: actions/checkout@v3
-        with:
-          lfs: "true"
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-
-      - name: Publish package
-        run: mvn --batch-mode deploy
+          settings-path: ${{ github.workspace }}
+            
+      - name: Maven Release x GitHub Packages
+        if: "github.ref_name == 'release' && !contains(github.event.head_commit.message, '[ci skip]')"
+        run: |
+          git config --global user.name "Genkey build bot"
+          git config --global user.email "build@genkey.com"
+          mvn release:prepare --batch-mode 
+          mvn release:perform -s $GITHUB_WORKSPACE/settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release the code
-        if: "github.ref_name == 'release' && !contains(github.event.head_commit.message, '[ci skip]')"
-        uses: qcastel/github-actions-maven-release@master
-        env:
-          JAVA_HOME: /usr/lib/jvm/java-21-openjdk/
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}    
