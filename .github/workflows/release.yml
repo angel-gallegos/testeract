@@ -30,7 +30,6 @@ jobs:
           settings-path: ${{ github.workspace }}
             
       - name: Maven Release x GitHub Packages
-        if: "github.ref_name == 'release' && !contains(github.event.head_commit.message, '[ci skip]')"
         run: |
           git config --global user.name "Genkey build bot"
           git config --global user.email "build@genkey.com"
