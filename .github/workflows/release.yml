@@ -26,27 +26,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          settings-path: ${{ github.workspace }} 
-
-      - name: Publish package
-        run: mvn --batch-mode deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Release the code
-        if: "github.ref_name == 'release-branch' && !contains(github.event.head_commit.message, '[ci skip]')"
-        uses: qcastel/github-actions-maven-release@master
-        env:
-          JAVA_HOME: /usr/lib/jvm/java-21-openjdk/
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release-branch-name: "release"
-          maven-servers: |
-            [{
-                "id": "github",
-                "username": "${{ secrets.RELEASE_USER }}",
-                "password": "${{ secrets.RELEASES_PWD }}"
-            }]
+          settings-path: ${{ github.workspace }}
             
       - name: Maven Release x GitHub Packages
         if: "github.ref_name == 'release' && !contains(github.event.head_commit.message, '[ci skip]')"
