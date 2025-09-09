@@ -26,22 +26,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          java-version: '21'
-          distribution: 'temurin'
-          settings-path: ${{ github.workspace }}
-            
-      - name: Maven Release x GitHub Packages
-        run: |
-          git config --global user.name "Genkey build bot"
-          git config --global user.email "build@genkey.com"
-          mvn release:prepare --batch-mode 
-          mvn release:perform -s $GITHUB_WORKSPACE/settings.xml
+      - name: Release
+        uses: qcastel/github-actions-maven-release@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+          JAVA_HOME: /usr/lib/jvm/java-21-openjdk/
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          release-branch-name: "release"
+
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
